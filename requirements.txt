@@ -1,0 +1,3 @@
+pycrytodome
+pbkdf2
+psycopg2-binary
