@@ -22,7 +22,7 @@ Connect via the `psql` CLI using the following credentials:
 
 | Field | Value |
 |--------------|-------------------|
-| **Host** | `184.104.233.38` |
+| **Host** | `192.168.12.114` |
 | **Port** | `5432` |
 | **Username** | `postgres` |
 | **Password** | `docker` |
@@ -35,4 +35,4 @@ Connect via the `psql` CLI using the following credentials:
 From any machine with the PostgreSQL client installed:
 
 ```bash
-psql -h 184.104.233.38 -p 5432 -U postgres -d world
+psql -h 192.168.12.114 -p 5432 -U postgres -d world
