@@ -17,15 +17,11 @@ def main():
 
     # Get master password input
     master_password_input = getpass.getpass("Master Password: ").encode()
-
-    # Disable second factor authentication by using empty bytes
     second_FA_location = b""
 
-    # Authenticate using query_master_pwd
-    if master_password.query_master_pwd(master_password_input, second_FA_location) is True:
+    if master_password.query_master_pwd(master_password_input, second_FA_location):
         print("\nSuccessfully Authenticated.\n")
 
-        # Derive the PBKDF2 hash again for encryption/decryption
         master_password_hash = PBKDF2(
             master_password_input + second_FA_location,
             master_password.salt,
@@ -69,7 +65,10 @@ def main():
         if record:
             password_field = record[2]
             decrypted = master_password.decrypt_password(password_field, master_password_hash)
-            print(f"Record:\n URL: {record[0]}, Username: {record[1]}, Password: {decrypted.decode('utf-8')}")
+            try:
+                print(f"Record:\n URL: {record[0]}, Username: {record[1]}, Password: {decrypted.decode('utf-8')}")
+            except UnicodeDecodeError:
+                print("Record:\n ERROR: Failed to decode password (wrong key or corrupt data)")
             print(f"Encrypted Record:\n URL: {record[0]}, Username: {record[1]}, Password: {record[2]}")
         else:
             print(f"Could not find record matching the value of '{URL}'")
@@ -110,10 +109,14 @@ def main():
             print("URL:", record[0])
             print("Username:", record[1])
             decrypted = master_password.decrypt_password(record[2], master_password_hash)
-            print("Password:", decrypted.decode('utf-8'))
+            try:
+                print("Password:", decrypted.decode('utf-8'))
+            except UnicodeDecodeError:
+                print("Password: ERROR decoding (wrong key or corrupt data)")
 
     connection.commit()
     cursor.close()
 
 main()
+
 
