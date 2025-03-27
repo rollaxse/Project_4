@@ -1,11 +1,7 @@
-CREATE TABLE cities (
-id SERIAL PRIMARY KEY,
-name TEXT NOT NULL,
-population INTEGER
+CREATE TABLE Vault (
+URL TEXT NOT NULL,
+Username TEXT NOT NULL,
+Password BYTEA NOT NULL
 );
 
-INSERT INTO cities (name, population) VALUES
-('New York', 8000000),
-('Los Angeles', 4000000),
-('Chicago', 2700000);
 	

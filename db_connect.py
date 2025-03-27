@@ -1,6 +1,11 @@
 import psycopg2
 
 def connection_db():
-    # Enter password under ******** field.
-    connection = psycopg2.connect("dbname=Vault-DB user=postgres password=********") 
-    return connection
+    return psycopg2.connect(
+        dbname="password_vault",
+        user="rollaxse",
+        password="Houseplant617",
+        host="localhost",  # <- important: use host, not socket
+        port="5432"
+    )
+

@@ -4,11 +4,11 @@ from Crypto.Protocol.KDF import PBKDF2
 from base64 import b64encode, b64decode
 
 # Salt generated from master_password_hash_generator.py (must match!)
-salt = b's2u\xd2\xf1\xe2\xda\xf3\xc4nW>$\x7f\x9e\x89'
+salt = b"\xcd\xd7}\x16\xafE\x99\xca\x9aY3\xedNi^\x96"
 
 def query_master_pwd(master_password, second_FA_location):
     # Paste your generated PBKDF2 hash here
-    master_password_hash = "3db231aa0582fa4361191a12c84382c77fb375e1cc360fc10cf6307a0c8a68fd"
+    master_password_hash = "d3f9a9f7bfcf24b3a2a692832fc697ac4a80424c625c3a57c94850c0c2e1f55e"
     # Recreate the PBKDF2 hash from input password + salt
     compile_factor_together = PBKDF2(
         master_password + second_FA_location,
@@ -24,7 +24,7 @@ def query_master_pwd(master_password, second_FA_location):
 
 def encrypt_password(password_to_encrypt, master_password_hash):
     # Generate the encryption key from the master password hash
-    key = PBKDF2(str(master_password_hash), salt).read(32)
+    key = PBKDF2(str(master_password_hash), salt, dkLen=32)
     data_convert = str.encode(password_to_encrypt)
     
     # Encrypt using AES in EAX mode
