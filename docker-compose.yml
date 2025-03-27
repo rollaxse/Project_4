@@ -1,10 +1,15 @@
-version: '3.8'
+version: "3.8"
 
 services:
   db:
-    build: .
+    image: postgres:14
+    restart: always
+    environment:
+      POSTGRES_USER: rollaxse
+      POSTGRES_PASSWORD: Houseplant617
+      POSTGRES_DB: password_vault
     ports:
       - "5432:5432"
-    environment:
-      POSTGRES_PASSWORD: docker
-      POSTGRES_DB: world
+    volumes:
+      - ./pg_data:/var/lib/postgresql/data
+

@@ -1,3 +1,2 @@
-pycrytodome
-pbkdf2
+pycryptodome
 psycopg2-binary
